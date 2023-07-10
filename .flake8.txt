@@ -1,4 +1,4 @@
 [flake8]
-exclude = env,migrations
+exclude = env
 max-line-length = 119
 
