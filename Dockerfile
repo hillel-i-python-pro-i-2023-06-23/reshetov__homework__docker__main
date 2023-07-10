@@ -1,5 +1,7 @@
 FROM python:3.11.0
 
+RUN apt update && apt upgrade -y
+
 COPY requirements.txt .
 
 RUN pip install --upgrade pip
