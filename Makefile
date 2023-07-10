@@ -41,7 +41,9 @@ homework-i-run:
 
 .PHONY: homework-i-purge
 homework-i-purge:
-	@echo Goodbye
+	@COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 \
+		docker compose down --volumes --remove-orphans --rmi local --timeout 0 && \
+	echo Goodbye
 
 .PHONY: pre-commit-run
 # Run tools for files from commit.
