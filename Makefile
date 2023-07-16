@@ -8,6 +8,11 @@ d-homework-i-run:
 d-homework-i-purge:
 	@make d-purge
 
+.PHONY: init-configs
+# Configuration files initialization
+init-configs:
+	@cp docker-compose.override.dev.yml docker-compose.override.yml
+
 .PHONY: d-run
 # Just run
 d-run:
