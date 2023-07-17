@@ -2,12 +2,25 @@ FROM python:3.11.0
 
 RUN apt update && apt upgrade -y
 
-COPY requirements.txt .
+ARG USER=user
+
+RUN mkdir /dir
+
+RUN useradd --system ${USER} && \
+    chown --recursive ${USER} /dir
+
+COPY requirements.txt /dir
+
+RUN chown ${USER} /dir/requirements.txt
 
 RUN pip install --upgrade pip
 
-RUN pip install -r requirements.txt
+RUN pip install -r /dir/requirements.txt
 
-COPY . .
+COPY . /dir
 
-ENTRYPOINT ["python", "main.py"]
+RUN chown ${USER} /dir
+
+USER ${USER}
+
+ENTRYPOINT ["python", "/dir/main.py"]
